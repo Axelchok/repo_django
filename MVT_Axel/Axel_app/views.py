@@ -8,8 +8,8 @@ def inicio(request):
 def lista_familiares(request):
     
     lista_familiares = Familiares.objects.all()
-    datos = {"datos":lista_familiares}
-    return render(request, "plantilla.html", datos)
+    datos_dicc = {"datos":lista_familiares}
+    return render(request, "plantilla.html", datos_dicc)
 
 def alta_familiares(request):
     familiar = Familiares(nombre="Axel", edad="29", nacimiento="1992-9-24")
@@ -18,5 +18,3 @@ def alta_familiares(request):
     familiar.save()
     familiar = Familiares(nombre="Susana", edad="66", nacimiento="1956-3-22")
     familiar.save()
-    
-    return HttpResponse("Todo Ok")
