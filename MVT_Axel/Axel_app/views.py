@@ -12,9 +12,10 @@ def lista_familiares(request):
     return render(request, "plantilla.html", datos_dicc)
 
 def alta_familiares(request):
-    familiar = Familiares(nombre="Axel", edad="29", nacimiento="1992-9-24")
+    familiar = Familiares(documento="29", nombre="Axel", fecha="1992-9-24")
     familiar.save()
-    familiar = Familiares(nombre="Ivan", edad="34", nacimiento="1986-4-2")
+    familiar = Familiares(documento="34", nombre="Ivan", fecha="1986-4-2")
     familiar.save()
-    familiar = Familiares(nombre="Susana", edad="66", nacimiento="1956-3-22")
+    familiar = Familiares(documento="66", nombre="Susana", fecha="1956-3-22")
     familiar.save()
+    return render(request, "plantilla.html")
