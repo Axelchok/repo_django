@@ -13,4 +13,4 @@ class Amigos(models.Model):
 class Tutores(models.Model):
     nombre = models.CharField(max_length=30)
     curso = models.CharField(max_length=30)
-    comision = models.CharField(max_length=30)
+    comision = models.IntegerField()

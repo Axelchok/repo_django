@@ -1,0 +1,15 @@
+{% extends "padre.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<main>    
+    {% for n in datos %}
+        <p>Edad: {{n.edad}} </p>
+        <p>Nombre: {{n.nombre}} </p>
+        <p>Fecha: {{n.fecha}} </p>
+    {% endfor %}
+</main>
+
+{% endblock %}
+</html>

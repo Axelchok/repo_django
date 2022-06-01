@@ -1,0 +1,15 @@
+{% extends "padre.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<main>    
+    {% for n in datos_amigos %}
+        <p>Nombre: {{n.nombre}} </p>
+        <p>Deporte favorito: {{n.deporte_favorito}} </p>
+        <p>Edad: {{n.edad}} </p>
+    {% endfor %}
+</main>
+
+{% endblock %}
+</html>
