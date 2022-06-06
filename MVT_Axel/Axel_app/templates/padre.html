@@ -21,8 +21,12 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'familiares' %}">Familiares</a>
+                <a class="btn btn-primary" href="{% url 'alta_familiares' %}">+</a>
+                <a class="btn btn-primary" href="{% url 'buscar_familiar' %}">Buscar familiar</a>
                 <a class="navbar-brand" href="{% url 'amigos' %}">Amigos</a>
+                <a class="btn btn-primary" href="{% url 'alta_amigos' %}">+</a>
                 <a class="navbar-brand" href="{% url 'tutores' %}">Tutores</a>
+                <a class="btn btn-primary" href="{% url 'alta_tutores' %}">+</a>
             </div>
         </nav>
         <!-- Masthead-->

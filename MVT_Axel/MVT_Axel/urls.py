@@ -19,6 +19,6 @@ from Axel_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("lista_familiares/", views.lista_familiares),
-    path('Axel_app/', include("Axel_app.urls"))
+    path('', views.inicio),
+    path('Axel_app/', include('Axel_app.urls'))
 ]

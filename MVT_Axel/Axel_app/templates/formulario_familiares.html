@@ -3,14 +3,14 @@
 
 {% block contenido %}
 
-<form action="" method="POST">
+<form action="alta_familiares" method="POST">
     {% csrf_token %}
     <p>Documento:</p>
-    <input type="number" name="documento">
+    <input type="number" name="documento" required>
     <p>Nombre:</p>
-    <input type="text" name="nombre">
+    <input type="text" name="nombre" required>
     <p>Fecha de nacimiento:</p>
-    <input type="date" name="fecha_de_nacimiento">
+    <input type="date" name="fecha" required>
     <input type="submit" value="Enviar">
 </form>
 

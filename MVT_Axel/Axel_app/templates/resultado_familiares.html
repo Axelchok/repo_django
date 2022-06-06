@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    {% if familiares %}
+
+    <ul>
+    {% for familiar in familiares %}
+        <li>{{familiar.documento}}</li>
+        <li>{{familiar.nombre}}</li>
+        <li>{{familiar.fecha}}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>No se encuentra el familiar</p>
+    {% endif%}
+
+</body>
+</html>

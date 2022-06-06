@@ -55,7 +55,7 @@ ROOT_URLCONF = 'MVT_Axel.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["C:/Users/Axelin/Python/CoderHouse/clase_18_entregable/MVT_Axel/Axel_app/Template/plantilla.html"],
+        'DIRS': ['C:/Users/Axelin/Python/CoderHouse/clase_18_entregable/nuevo_repo/MVT_Axel/Axel_app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
