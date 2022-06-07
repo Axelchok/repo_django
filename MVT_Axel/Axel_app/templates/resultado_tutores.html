@@ -5,18 +5,18 @@
 
 <body>
     
-    {% if familiares %}
+    {% if tutores %}
 
     <ul>
-    {% for familiar in familiares %}
-        <li>{{familiar.documento}}</li>
-        <li>{{familiar.nombre}}</li>
-        <li>{{familiar.fecha}}</li>
+    {% for tutor in tutores %}
+        <li>{{tutor.nombre}}</li>
+        <li>{{tutor.curso}}</li>
+        <li>{{tutor.comision}}</li>
     {% endfor %}
     </ul>
     {% else %}
-        <p>No se encuentra el familiar</p>
-    {% endif%}
+        <p>No se encuentra el tutor</p>
+    {% endif %}
     <button>
         <a href="{% url 'inicio' %}">Volver</a>
     </button>

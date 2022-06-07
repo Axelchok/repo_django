@@ -5,17 +5,17 @@
 
 <body>
     
-    {% if familiares %}
+    {% if amigos %}
 
     <ul>
-    {% for familiar in familiares %}
-        <li>{{familiar.documento}}</li>
-        <li>{{familiar.nombre}}</li>
-        <li>{{familiar.fecha}}</li>
+    {% for amigo in amigos %}
+        <li>{{amigo.nombre}}</li>
+        <li>{{amigo.deporte_favorito}}</li>
+        <li>{{amigo.edad}}</li>
     {% endfor %}
     </ul>
     {% else %}
-        <p>No se encuentra el familiar</p>
+        <p>No se encuentra el amigo</p>
     {% endif%}
     <button>
         <a href="{% url 'inicio' %}">Volver</a>

@@ -1,14 +1,33 @@
-{% extends "padre.html" %}
+{% extends "padre2.html" %}
 {% load static %}
 
 {% block contenido %}
 
-<main>    
-    {% for n in datos %}
-        <p>Documento: {{n.documento}} </p>
-        <p>Nombre: {{n.nombre}} </p>
-        <p>Fecha: {{n.fecha}} </p>
-    {% endfor %}
+<main>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Documento</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de nacimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for n in datos %}
+                <th scope="row">{{n.id}}</th>
+                <td>Documento: {{n.documento}} </td>
+                <td>Nombre: {{n.nombre}} </td>
+                <td>Fecha: {{n.fecha}} </td>
+                <td><a href="{% url 'borrar_familiar' n.id %}">Borrar</a></td>              
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>    
+    <button>
+      <a class="btn btn-primary" href="{% url 'alta_familiares' %}" style="background-color: rgb(10, 112, 1);">Agregar otro familiar</a>
+    </button>
 </main>
 
 {% endblock %}

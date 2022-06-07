@@ -1,15 +1,32 @@
-{% extends "padre.html" %}
+{% extends "padre2.html" %}
 {% load static %}
 
 {% block contenido %}
-
-<main>    
-    {% for n in datos_amigos %}
-        <p>Nombre: {{n.nombre}} </p>
-        <p>Deporte favorito: {{n.deporte_favorito}} </p>
-        <p>Edad: {{n.edad}} </p>
-    {% endfor %}
+<main>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Deporte favorito</th>
+            <th scope="col">Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for n in datos_amigos %}
+                <th scope="row">{{n.id}}</th>
+                <td>Nombre: {{n.nombre}} </td>
+                <td>Deporte favorito: {{n.deporte_favorito}} </td>
+                <td>Edad: {{n.edad}}: {{n.edad}} </td>
+                <td><a href="{% url 'borrar_amigo' n.id %}">Borrar</a></td> 
+            </tr>
+            {% endfor %}    
+        </tbody>
+      </table>    
+    <button>
+        <a class="btn btn-primary" href="{% url 'alta_amigos' %}" style="background-color: rgb(10, 112, 1);">Agregar otro amigo</a>
+    </button>
 </main>
-
 {% endblock %}
 </html>

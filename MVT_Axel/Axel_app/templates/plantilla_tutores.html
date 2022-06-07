@@ -1,15 +1,32 @@
-{% extends "padre.html" %}
+{% extends "padre2.html" %}
 {% load static %}
 
 {% block contenido %}
-
-<main>    
-    {% for n in datos_tutores %}
-        <p>Nombre: {{n.nombre}} </p>
-        <p>Curso: {{n.curso}} </p>
-        <p>Comision: {{n.comision}} </p>
-    {% endfor %}
+<main>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Deporte favorito</th>
+            <th scope="col">Edad</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for n in datos_tutores %}
+                <th scope="row">{{n.id}}</td>
+                <td>Nombre: {{n.nombre}} </td>
+                <td>Curso: {{n.curso}} </td>
+                <td>Comision: {{n.comision}} </td>
+                <td><a href="{% url 'borrar_tutor' n.id %}">Borrar</a></td> 
+            </tr>
+            {% endfor %}    
+        </tbody>
+      </table>    
+    <button>
+        <a href="alta_tutores">Agregar otro tutor</a>
+    </button>
 </main>
-
 {% endblock %}
 </html>

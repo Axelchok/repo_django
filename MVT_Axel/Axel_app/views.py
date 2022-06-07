@@ -42,10 +42,10 @@ def alta_tutores(request):
     if request.method == "POST":
         
     
-        mi_formulario_turores = Tutores_formulario(request.POST)
+        mi_formulario_tutores = Tutores_formulario(request.POST)
         
-        if mi_formulario_amigos.is_valid():
-            datos_tutores = mi_formulario_amigos.cleaned_data
+        if mi_formulario_tutores.is_valid():
+            datos_tutores = mi_formulario_tutores.cleaned_data
         
             tutor = Tutores(nombre=request.POST.get('nombre', False), curso=request.POST.get('curso', False), comision=request.POST.get('comision', False))
             tutor.save()
@@ -75,8 +75,45 @@ def buscar_familiar(request):
         return render(request, "resultado_familiares.html", {'familiares':familiares})
     return render(request, "buscar_familiar.html")
 
+def buscar_amigo(request):
 
+    if request.POST.get('nombre', False):
+        nombre = request.POST.get('nombre', False)
+        amigos = Amigos.objects.filter(nombre__icontains = nombre)
+        return render(request, "resultado_amigos.html", {'amigos':amigos})
+    return render(request, "buscar_amigo.html")
 
+def buscar_tutor(request):
+
+    if request.POST.get('nombre', False):
+        nombre = request.POST.get('nombre', False)
+        tutores = Tutores.objects.filter(nombre__icontains = nombre)
+        return render(request, "resultado_tutores.html", {'tutores':tutores})
+    return render(request, "buscar_tutor.html")
+
+def borrar_familiar(request, id):
+
+    familiar = Familiares.objects.get(id=id)
+    familiar.delete()
+    
+    familiar = Familiares.objects.all()
+    return render(request, "plantilla_familiares.html")
+
+def borrar_amigo(request, id):
+
+    amigo = Amigos.objects.get(id=id)
+    amigo.delete()
+    
+    amigo = Amigos.objects.all()
+    return render(request, "plantilla_amigos.html")
+
+def borrar_tutor(request, id):
+
+    tutor = Tutores.objects.get(id=id)
+    tutor.delete()
+    
+    tutor = Tutores.objects.all()
+    return render(request, "plantilla_tutores.html")
 
 
 '''
