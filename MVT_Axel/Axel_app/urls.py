@@ -14,5 +14,11 @@ urlpatterns = [
     path("buscar_tutor", views.buscar_tutor, name='buscar_tutor'),
     path("borrar_familiar/<int:id>", views.borrar_familiar, name='borrar_familiar'),
     path("borrar_amigo/<int:id>", views.borrar_amigo, name='borrar_amigo'),
-    path("borrar_tutor/<int:id>", views.borrar_tutor, name='borrar_tutor')
+    path("borrar_tutor/<int:id>", views.borrar_tutor, name='borrar_tutor'),
+    path("editar_familiar/<int:id>", views.editar_familiar, name='editar_familiar'),
+    path("editar_familiar", views.editar_familiar, name='editar_familiar'),
+    path("editar_amigo/<int:id>", views.editar_amigo, name='editar_amigo'),
+    path("editar_amigo", views.editar_amigo, name='editar_amigo'),
+    path("editar_tutor/<int:id>", views.editar_tutor, name='editar_tutor'),
+    path("editar_tutor", views.editar_tutor, name='editar_tutor')
 ]

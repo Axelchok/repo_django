@@ -18,8 +18,9 @@
                 <th scope="row">{{n.id}}</th>
                 <td>Nombre: {{n.nombre}} </td>
                 <td>Deporte favorito: {{n.deporte_favorito}} </td>
-                <td>Edad: {{n.edad}}: {{n.edad}} </td>
+                <td>Edad: {{n.edad}} </td>
                 <td><a href="{% url 'borrar_amigo' n.id %}">Borrar</a></td> 
+                <td><a href="{% url 'editar_amigo' n.id %}">Editar</a></td> 
             </tr>
             {% endfor %}    
         </tbody>

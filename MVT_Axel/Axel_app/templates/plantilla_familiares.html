@@ -20,7 +20,8 @@
                 <td>Documento: {{n.documento}} </td>
                 <td>Nombre: {{n.nombre}} </td>
                 <td>Fecha: {{n.fecha}} </td>
-                <td><a href="{% url 'borrar_familiar' n.id %}">Borrar</a></td>              
+                <td><a href="{% url 'borrar_familiar' n.id %}">Borrar</a></td>   
+                <td><a href="{% url 'editar_familiar' n.id %}">Editar</a></td>         
             </tr>
             {% endfor %}
         </tbody>

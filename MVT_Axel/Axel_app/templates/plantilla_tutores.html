@@ -20,6 +20,7 @@
                 <td>Curso: {{n.curso}} </td>
                 <td>Comision: {{n.comision}} </td>
                 <td><a href="{% url 'borrar_tutor' n.id %}">Borrar</a></td> 
+                <td><a href="{% url 'editar_tutor' n.id %}">Editar</a></td> 
             </tr>
             {% endfor %}    
         </tbody>

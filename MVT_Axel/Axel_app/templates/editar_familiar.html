@@ -1,0 +1,18 @@
+{% extends "padre2.html" %}
+{% load static %}
+
+{% block contenido %}
+
+<form action="{% url 'editar_familiar' familiar.id %}" method="POST">
+    {% csrf_token %}
+    <p>Documento:</p>
+    <input type="number" name="documento" required>
+    <p>Nombre:</p>
+    <input type="text" name="nombre" required>
+    <p>Fecha de nacimiento:</p>
+    <input type="date" name="fecha" required>
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock %}
+</html>

@@ -115,6 +115,63 @@ def borrar_tutor(request, id):
     tutor = Tutores.objects.all()
     return render(request, "plantilla_tutores.html")
 
+def editar_familiar(request, id):
+
+    familiar = Familiares.objects.get(id=id)
+    
+    if request.method == "POST":
+        
+        mi_formulario = Familiares_formulario(request.POST)
+
+        if mi_formulario.is_valid():
+            datos = mi_formulario.cleaned_data
+            familiar.documento = datos['documento']
+            familiar.nombre = datos['nombre']
+            familiar.fecha = datos['fecha']
+            familiar.save()
+    else:
+        mi_formulario = Familiares_formulario(initial={'documento':familiar.documento, 'nombre':familiar.nombre,'fecha':familiar.fecha})
+    return render(request, "editar_familiar.html", {"mi_formulario":mi_formulario, "familiar":familiar})
+
+def editar_amigo(request, id):
+
+    amigo = Amigos.objects.get(id=id)
+    
+    if request.method == "POST":
+        
+        mi_formulario_amigos = Amigos_formulario(request.POST)
+
+        if mi_formulario_amigos.is_valid():
+            datos_amigos = mi_formulario_amigos.cleaned_data
+            amigo.nombre = datos_amigos['nombre']
+            amigo.deporte_favorito = datos_amigos['deporte_favorito']
+            amigo.edad = datos_amigos['edad']
+            amigo.save()
+
+    else:
+        mi_formulario_amigos = Amigos_formulario(initial={'nombre':amigo.nombre, 'deporte_favorito':amigo.deporte_favorito,'edad':amigo.edad})
+    return render(request, "editar_amigo.html", {"mi_formulario_amigos":mi_formulario_amigos, "amigo":amigo})
+
+def editar_tutor(request, id):
+
+    tutor = Tutores.objects.get(id=id)
+    
+    if request.method == "POST":
+        
+        mi_formulario_tutores = Tutores_formulario(request.POST)
+
+        if mi_formulario_tutores.is_valid():
+            datos = mi_formulario_tutores.cleaned_data
+            tutor.nombre = datos['nombre']
+            tutor.curso = datos['curso']
+            tutor.comision = datos['comision']
+            tutor.save()
+    else:
+        mi_formulario_tutores = Tutores_formulario(initial={'nombre':tutor.nombre, 'curso':tutor.curso, 'comision':tutor.comision})
+    return render(request, "editar_tutor.html", {"mi_formulario_tutores":mi_formulario_tutores, "tutor":tutor})
+
+
+
 
 '''
 def alta_familiares(request):
