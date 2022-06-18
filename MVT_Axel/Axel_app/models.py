@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Familiares(models.Model):
     documento = models.IntegerField()
@@ -20,3 +21,7 @@ class Tutores(models.Model):
     comision = models.IntegerField()
     def __str__(self):
         return f"Nombre: {self.nombre}. Curso: {self.curso}. Comision: {self.comision}"
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank=True)

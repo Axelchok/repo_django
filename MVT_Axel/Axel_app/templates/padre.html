@@ -20,16 +20,52 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
+                {% if request.user.is_authenticated %}
+                <img src="{{url}}" alt="" height="50px">
+                {% endif %}
                 <a class="btn btn-primary" href="{% url 'inicio' %}" style="background-color: rgb(251, 115, 3);">Inicio</a>
+                {% if request.user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'familiares' %}">Familiares</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'alta_familiares' %}">+</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'buscar_familiar' %}" style="background-color: green;">Buscar familiar</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'amigos' %}">Amigos</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'alta_amigos' %}">+</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'buscar_amigo' %}" style="background-color: green;">Buscar amigo</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'tutores' %}">Tutores</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'alta_tutores' %}">+</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
                 <a class="btn btn-primary" href="{% url 'buscar_tutor' %}" style="background-color: green;">Buscar tutor</a>
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'login' %}" style="background-color: rgb(251, 115, 3);">Login</a>
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'register' %}" style="background-color: rgb(251, 115, 3);">Registrarse</a>
+                {% endif %}
+                <!-- {% if not request.user.is_authenticated %}
+                <img src="{{url}}" alt="">
+                {% endif %} -->
+                {% if request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'editar_perfil' %}" style="background-color: rgb(251, 115, 3);">Editar perfil</a>
+                {% endif %}
+                {% if request.user.is_authenticated %}
+                <a class="btn btn-primary" href="{% url 'logout' %}" style="background-color: rgb(251, 115, 3);">Log Out</a>
+                {% endif %}
             </div>
         </nav>
         <!-- Masthead-->

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
@@ -15,10 +16,15 @@ urlpatterns = [
     path("borrar_familiar/<int:id>", views.borrar_familiar, name='borrar_familiar'),
     path("borrar_amigo/<int:id>", views.borrar_amigo, name='borrar_amigo'),
     path("borrar_tutor/<int:id>", views.borrar_tutor, name='borrar_tutor'),
+    path("editar_perfil", views.editar_perfil, name='editar_perfil'),
     path("editar_familiar/<int:id>", views.editar_familiar, name='editar_familiar'),
     path("editar_familiar", views.editar_familiar, name='editar_familiar'),
     path("editar_amigo/<int:id>", views.editar_amigo, name='editar_amigo'),
     path("editar_amigo", views.editar_amigo, name='editar_amigo'),
     path("editar_tutor/<int:id>", views.editar_tutor, name='editar_tutor'),
-    path("editar_tutor", views.editar_tutor, name='editar_tutor')
+    path("editar_tutor", views.editar_tutor, name='editar_tutor'),
+    path("login", views.login_request, name='login'),
+    path("register", views.register, name='register'),
+    path("logout", LogoutView.as_view(template_name="logout.html"), name='logout'),
+    path("editar_perfil", views.editar_perfil, name='editar_perfil')
 ]

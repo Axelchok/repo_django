@@ -2,10 +2,15 @@ from django.shortcuts import render, redirect
 from Axel_app.models import *
 from django.http import HttpResponse
 from Axel_app.forms import *
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     return render(request, "padre.html")
+    
 
+@login_required
 def lista_familiares(request):
     
     lista_familiares = Familiares.objects.all()
@@ -170,7 +175,70 @@ def editar_tutor(request, id):
         mi_formulario_tutores = Tutores_formulario(initial={'nombre':tutor.nombre, 'curso':tutor.curso, 'comision':tutor.comision})
     return render(request, "editar_tutor.html", {"mi_formulario_tutores":mi_formulario_tutores, "tutor":tutor})
 
+def login_request(request):
 
+    if request.method == "POST":
+
+        form = AuthenticationForm(request, data=request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
+            
+
+            user = authenticate(username=usuario, password=contrasenia)
+
+            if user is not None:
+                login(request, user)
+                avatares = Avatar.objects.filter(user=request.user.id)
+                return render(request, "padre.html",{"url":avatares[0].imagen.url}) 
+
+            else:
+                return HttpResponse("Usuario incorrecto")
+        else:
+            return render(request, "login.html", {"form":form})
+
+    form = AuthenticationForm()
+
+    return render(request, "login.html", {"form":form})
+
+def register(request):
+    
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request, "inicio.html", {"mensaje":"Usuario creado"})
+        
+    else:
+        form = UserCreationForm()
+
+    return render(request, "register.html", {"form":form})
+            
+@login_required
+def editar_perfil(request):
+
+    usuario = request.user
+
+    if request.method == "POST":
+        mi_formulario = UserEditForm(request.POST)
+
+        if mi_formulario.is_valid():
+            informacion = mi_formulario.cleaned_data
+            usuario.username = informacion['username']
+            password = informacion['password_uno']
+            usuario.set_password(password)
+            usuario.save()
+
+            return render(request, "inicio.html")
+
+
+    else:
+        mi_formulario = UserEditForm(initial={'username':usuario.username})
+
+    return render(request, "editar_perfil.html", {'mi_formulario':mi_formulario, "usuario":usuario})
 
 
 '''
