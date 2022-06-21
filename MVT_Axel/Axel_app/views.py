@@ -179,6 +179,7 @@ def login_request(request):
 
     if request.method == "POST":
 
+        mi_formulario = Avatar(request.POST, request.FILES)
         form = AuthenticationForm(request, data=request.POST)
 
         if form.is_valid():
@@ -191,8 +192,11 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 avatares = Avatar.objects.filter(user=request.user.id)
-                return render(request, "padre.html",{"url":avatares[0].imagen.url}) 
-
+                if avatares == True:
+                    return render(request, "padre.html",{"url":avatares[0].imagen.url}) 
+                else:
+                    default = '/static/Axel_app/images/standard_profile.jpg'
+                    return render(request, "padre.html", {"url":default})
             else:
                 return HttpResponse("Usuario incorrecto")
         else:
@@ -239,6 +243,7 @@ def editar_perfil(request):
         mi_formulario = UserEditForm(initial={'username':usuario.username})
 
     return render(request, "editar_perfil.html", {'mi_formulario':mi_formulario, "usuario":usuario})
+
 
 
 '''
