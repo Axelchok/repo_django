@@ -7,29 +7,61 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
 def inicio(request):
-    return render(request, "padre.html")
+    avatares = Avatar.objects.filter(user=request.user.id)
+    print(avatares)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+        return render(request, "padre.html", avatar)
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
+        return render(request, "padre.html", avatar)
     
 
 @login_required
 def lista_familiares(request):
     
     lista_familiares = Familiares.objects.all()
-    datos_dicc_familiares = {"datos":lista_familiares}
-    return render(request, "plantilla_familiares.html", datos_dicc_familiares)
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        datos_dicc = {"datos":lista_familiares, "url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        datos_dicc = {"datos":lista_familiares, "url":default}
+
+    return render(request, "plantilla_familiares.html", datos_dicc)
+    
 
 def lista_amigos(request):
     
     lista_amigos = Amigos.objects.all()
-    datos_dicc_amigos = {"datos_amigos":lista_amigos}
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        datos_dicc_amigos = {"datos":lista_amigos, "url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        datos_dicc_amigos = {"datos":lista_amigos, "url":default}
+
     return render(request, "plantilla_amigos.html", datos_dicc_amigos)
 
 def lista_tutores(request):
     
     lista_tutores = Tutores.objects.all()
-    datos_dicc_tutores = {"datos_tutores":lista_tutores}
-    return render(request, "plantilla_tutores.html", datos_dicc_tutores)
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        datos_dicc_tutores = {"datos":lista_tutores, "url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        datos_dicc = {"datos":lista_tutores, "url":default}
+    return render(request, "plantilla_tutores.html", datos_dicc)
 
 def alta_familiares(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
     if request.method == "POST":
         
         mi_formulario = Familiares_formulario(request.POST)
@@ -39,14 +71,20 @@ def alta_familiares(request):
 
             familiar = Familiares(documento=request.POST['documento'], nombre=request.POST['nombre'], fecha=request.POST['fecha'])
             familiar.save()
-            return render(request, "formulario_familiares.html")
+            return render(request, "formulario_familiares.html", avatar)
         
-    return render(request, "formulario_familiares.html")
+    return render(request, "formulario_familiares.html", avatar)
 
 def alta_tutores(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
+
     if request.method == "POST":
-        
-    
+            
         mi_formulario_tutores = Tutores_formulario(request.POST)
         
         if mi_formulario_tutores.is_valid():
@@ -55,9 +93,16 @@ def alta_tutores(request):
             tutor = Tutores(nombre=request.POST.get('nombre', False), curso=request.POST.get('curso', False), comision=request.POST.get('comision', False))
             tutor.save()
         
-    return render(request, "formulario_tutores.html")
+    return render(request, "formulario_tutores.html", avatar)
 
 def alta_amigos(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
+
     if request.method == "POST":
         
         mi_formulario_amigos = Amigos_formulario(request.POST)
@@ -67,26 +112,38 @@ def alta_amigos(request):
 
             amigo = Amigos(nombre=request.POST.get('nombre', False), deporte_favorito=request.POST.get('deporte_favorito', False), edad=request.POST.get('edad', False))
             amigo.save()
-            return render(request, "formulario_amigos.html")
+            return render(request, "formulario_amigos.html", avatar)
         
-    return render(request, "formulario_amigos.html")
+    return render(request, "formulario_amigos.html", avatar)
 
 
 def buscar_familiar(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
 
     if request.POST.get('nombre', False):
         nombre = request.POST.get('nombre', False)
         familiares = Familiares.objects.filter(nombre__icontains = nombre)
         return render(request, "resultado_familiares.html", {'familiares':familiares})
-    return render(request, "buscar_familiar.html")
+    return render(request, "buscar_familiar.html", avatar)
 
 def buscar_amigo(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
 
     if request.POST.get('nombre', False):
         nombre = request.POST.get('nombre', False)
         amigos = Amigos.objects.filter(nombre__icontains = nombre)
         return render(request, "resultado_amigos.html", {'amigos':amigos})
-    return render(request, "buscar_amigo.html")
+    return render(request, "buscar_amigo.html", avatar)
 
 def buscar_tutor(request):
 
@@ -97,12 +154,18 @@ def buscar_tutor(request):
     return render(request, "buscar_tutor.html")
 
 def borrar_familiar(request, id):
-
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
+    
     familiar = Familiares.objects.get(id=id)
     familiar.delete()
     
     familiar = Familiares.objects.all()
-    return render(request, "plantilla_familiares.html")
+    return render(request, "plantilla_familiares.html", avatar)
 
 def borrar_amigo(request, id):
 
@@ -121,7 +184,7 @@ def borrar_tutor(request, id):
     return render(request, "plantilla_tutores.html")
 
 def editar_familiar(request, id):
-
+    
     familiar = Familiares.objects.get(id=id)
     
     if request.method == "POST":
@@ -244,6 +307,23 @@ def editar_perfil(request):
 
     return render(request, "editar_perfil.html", {'mi_formulario':mi_formulario, "usuario":usuario})
 
+def about(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
+    return render(request, "about.html", avatar)
+
+def perfil(request):
+    avatares = Avatar.objects.filter(user=request.user.id)
+    if avatares == True:
+        avatar = {"url":avatares[0].imagen.url}
+    else:
+        default = '/static/Axel_app/images/standard_profile.jpg'
+        avatar = {"url":default}
+    return render(request, "perfil.html", avatar)
 
 
 '''

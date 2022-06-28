@@ -24,6 +24,7 @@
                 <img src="{{url}}" alt="" height="50px">
                 {% endif %}
                 <a class="btn btn-primary" href="{% url 'inicio' %}" style="background-color: rgb(251, 115, 3);">Inicio</a>
+                <a class="btn btn-primary" href="{% url 'about' %}" style="background-color: rgb(3, 205, 251);">Sobre mi</a>
                 {% if request.user.is_authenticated %}
                 <a class="navbar-brand" href="{% url 'familiares' %}">Familiares</a>
                 {% endif %}
