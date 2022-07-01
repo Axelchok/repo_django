@@ -27,7 +27,7 @@ class Login(AuthenticationForm):
 
 class UserEditForm(UserCreationForm):
 
-    email = forms.EmailField(label="Mail")
+    email = forms.EmailField(label="Email")
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Repetir la contraseña", widget=forms.PasswordInput)
 

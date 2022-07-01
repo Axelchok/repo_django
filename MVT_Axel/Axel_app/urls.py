@@ -3,7 +3,6 @@ from . import views
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', views.inicio, name='inicio'),
     path("lista_familiares", views.lista_familiares, name='familiares'),
     path("lista_amigos", views.lista_amigos, name='amigos'),
     path("lista_tutores", views.lista_tutores, name='tutores'),
@@ -29,5 +28,4 @@ urlpatterns = [
     path("editar_perfil", views.editar_perfil, name='editar_perfil'),
     path("about", views.about, name='about'),
     path("perfil", views.perfil, name='perfil')
-    # path("agregar_avatar", views.agregar_avatar, nam='agregar_avatar')
 ]
